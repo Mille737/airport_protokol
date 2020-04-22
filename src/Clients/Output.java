@@ -11,6 +11,7 @@ public class Output extends Thread {
     private Socket socket;
     private Client client;
     private OutputStream outputStream;
+    private String userName;
 
     public Output(Socket socket, Client client) {
         this.socket = socket;
@@ -25,8 +26,11 @@ public class Output extends Thread {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        String messageToTower;
         try {
+        String messageToTower;
+        System.out.println("Enter your user name: ");
+        userName = scanner.nextLine();
+        printWriter.println(userName);
             do {
                 messageToTower = scanner.nextLine();
                 printWriter.println(messageToTower);

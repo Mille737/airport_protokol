@@ -28,6 +28,10 @@ public class Input extends Thread {
         while (true) {
             try {
                 String messageFromTower = bufferedReader.readLine();
+                if(messageFromTower == null) {
+                    System.out.println("System closing.");
+                    System.exit(1);
+                }
                 System.out.println(messageFromTower);
             } catch (IOException e) {
                 e.printStackTrace();
