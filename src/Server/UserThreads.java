@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 public class UserThreads extends Thread {
 
     private Socket socket;
-    private ServerTower serverTower;
+    public ServerTower serverTower;
     private UserThreads userThreads;
     public PrintWriter printWriter;
     private InputStream inputStream;
@@ -30,6 +30,7 @@ public class UserThreads extends Thread {
         this.serverTower = serverTower;
         this.userName = userName;
     }
+   // public UserThreads() {}
 
     public void run() {
 
@@ -44,14 +45,19 @@ public class UserThreads extends Thread {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        if(userName.equals("Gate")) {
-            gateProtocol();
-        } else if(userName.equals("Bagage")) {
-            baggageProtocol();
-        } else if(userName.equals("Brændstof")) {
-            fuelProtocol();
-        } else if (userName.equals("Pilot")) {
-            pilotProtocol();
+        switch (userName) {
+            case "Gate":
+                gateProtocol();
+                break;
+            case "Bagage":
+                baggageProtocol();
+                break;
+            case "Brændstof":
+                fuelProtocol();
+                break;
+            case "Pilot":
+                pilotProtocol();
+                break;
         }
     }
 
@@ -212,23 +218,44 @@ public class UserThreads extends Thread {
                 switch (choice) {
                     case "A":
                         if(responseFromTower) {
-                            printWriter.println("Tilladelse til at lande: Accepted." + time.now());
+                            printWriter.println("Tilladelse til at lande: Accepted. " + time.now());
                             System.out.println("Tilladelse til at lande. " + time.now());
+                            String messageFromClient;
+                            int counter = 1;
+                            do {
+                                messageFromClient = bufferedReader.readLine();
+                                System.out.println(messageFromClient);
+                                counter++;
+                            } while(counter < 3);
                         }
                         break;
                     case "B":
                         if(responseFromTower) {
                             printWriter.println("Taxi til gate: Accepted. " + time.now());
                             System.out.println("Tilladelse til taxi til gate.");
+                            String messageFromClient;
+                            int counter = 1;
+                            do {
+                                messageFromClient = bufferedReader.readLine();
+                                System.out.println(messageFromClient);
+                                counter++;
+                            } while(counter < 3);
                             if(bufferedReader.readLine().startsWith("Ankommet ved gate.")) {
-                                printWriter.println("Ankommet ved gate: Accepted" + time.now());
+                                printWriter.println("Ankommet ved gate: Accepted " + time.now());
                                 writeToOne("Gate","Ankommet ved gate.");
                             }
                         } else {
-                            printWriter.println("Taxi til venteplads." + time.now());
+                            printWriter.println("Taxi til venteplads. " + time.now());
                             if(bufferedReader.readLine().startsWith("Ankommet ved venteplads.")) {
-                                printWriter.println("Ankommet ved venteplads: Accepted" + time.now());
+                                printWriter.println("Ankommet ved venteplads: Accepted " + time.now());
                             }
+                            String messageFromClient;
+                            int counter = 1;
+                            do {
+                                messageFromClient = bufferedReader.readLine();
+                                System.out.println(messageFromClient);
+                                counter++;
+                            } while(counter < 3);
                         }
                         break;
                     case "C":
@@ -236,18 +263,39 @@ public class UserThreads extends Thread {
                             printWriter.println("Taxi fra gate: Accepted. " + time.now());
                             System.out.println("Tilladelse til taxi fra gate.");
                             if(bufferedReader.readLine().startsWith("Ankommet ved start.")) {
-                                printWriter.println("Ankommet ved start: Accepted" + time.now());
+                                printWriter.println("Ankommet ved start: Accepted " + time.now());
                             }
+                            String messageFromClient;
+                            int counter = 1;
+                            do {
+                                messageFromClient = bufferedReader.readLine();
+                                System.out.println(messageFromClient);
+                                counter++;
+                            } while(counter < 3);
 
                         } else {
-                            printWriter.println("Taxi til venteplads." + time.now());
+                            printWriter.println("Taxi til venteplads. " + time.now());
                             if(bufferedReader.readLine().startsWith("Ankommet ved venteplads.")) {
-                                printWriter.println("Ankommet ved venteplads: Accepted" + time.now());
+                                printWriter.println("Ankommet ved venteplads: Accepted " + time.now());
                             }
+                            String messageFromClient;
+                            int counter = 1;
+                            do {
+                                messageFromClient = bufferedReader.readLine();
+                                System.out.println(messageFromClient);
+                                counter++;
+                            } while(counter < 3);
                         }
                         break;
                     case "D":
                         printWriter.println("Tilladelse til at lette: Accepted. " + time.now());
+                        String messageFromClient;
+                        int counter = 1;
+                        do {
+                            messageFromClient = bufferedReader.readLine();
+                            System.out.println(messageFromClient);
+                            counter++;
+                        } while(counter < 2);
                         break;
                     case "F":
                         printWriter.println("Forsinkelse på 10 min: Accepted. " + time.now());

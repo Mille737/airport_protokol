@@ -18,6 +18,8 @@ public class ServerTower {
     }
     private String userName;
 
+    public ServerTower() {}
+
 
     public void server() {
         try (ServerSocket serverSocket = new ServerSocket(port)) {

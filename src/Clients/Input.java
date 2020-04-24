@@ -1,4 +1,4 @@
-package Clients;
+/*package Clients;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -12,11 +12,22 @@ public class Input extends Thread {
     private Socket socket;
     private Client client;
     private InputStream inputStream;
+    private String messageFromTower;
+
+    public String getMessageFromTower() {
+        return messageFromTower;
+    }
+    public void setMessageFromTower(String messageFromTower) {
+        this.messageFromTower = messageFromTower;
+    }
 
     public Input(Socket socket, Client client) {
         this.socket = socket;
         this.client = client;
     }
+    public Input(){}
+
+    Output output = new Output(socket, client);
 
     public void run() {
         try {
@@ -27,16 +38,20 @@ public class Input extends Thread {
         }
         while (true) {
             try {
-                String messageFromTower = bufferedReader.readLine();
+                setMessageFromTower(bufferedReader.readLine());
                 if(messageFromTower == null) {
                     System.out.println("System closing.");
                     System.exit(1);
                 }
+                if(messageFromTower.startsWith("Tilladelse til at lande: Accepted.")) {
+                    output.landingResponse();
+                }
                 System.out.println(messageFromTower);
-            } catch (IOException e) {
+            } catch (IOException | InterruptedException e) {
                 e.printStackTrace();
             }
         }
 
     }
 }
+*/

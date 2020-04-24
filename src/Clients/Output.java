@@ -1,4 +1,7 @@
-package Clients;
+/* package Clients;
+
+import Server.ServerTower;
+import Server.UserThreads;
 
 import java.io.*;
 import java.net.Socket;
@@ -6,13 +9,15 @@ import java.time.LocalDateTime;
 import java.util.Scanner;
 
 public class Output extends Thread {
-    private PrintWriter printWriter;
-    private Socket socket;
+
+    private ServerTower serverTower;
     private Client client;
     private OutputStream outputStream;
-    private String userName;
+    private PrintWriter printWriter;
     private BufferedReader bufferedReader;
+    private String userName;
     private static LocalDateTime time;
+    private Output output;
 
 
     public Output(Socket socket, Client client) {
@@ -38,17 +43,14 @@ public class Output extends Thread {
             do {
                 messageToTower = scanner.nextLine();
                 printWriter.println(messageToTower);
-                String messageFromTower = bufferedReader.readLine();
+                Input input = new Input();
+                //String messageFromTower = bufferedReader.readLine();
+                System.out.println("test" + messageToTower + input.getMessageFromTower());
+                //UserThreads userThreads = new UserThreads(socket, serverTower, userName);
+                //userThreads.writeToOne("Pilot", "test");
 
-                if(messageFromTower.startsWith("Tilladelse til at lande: Accepted.")) {
-                    System.out.println(messageFromTower + time.now() + "j");
-                    System.out.println("Landing påbegyndt. " + time.now());
-                    printWriter.println("Landing påbegyndt. " + time.now());
-                    Thread.sleep(20000);
-                    System.out.println("Er landet." + time.now());
-                    printWriter.println("Er landet." + time.now());
-                }
-                if(messageFromTower.startsWith("Taxi til gate: Accepted.")) {
+
+                /*if(messageFromTower.startsWith("Taxi til gate: Accepted.")) {
                     System.out.println(messageFromTower);
                     System.out.println("Taxi til gate påbegyndt. " + time.now());
                     printWriter.println("Taxi til gate påbegyndt. " + time.now());
@@ -73,12 +75,23 @@ public class Output extends Thread {
                 if(messageFromTower.startsWith("Tilladelse til at lette: Accepted.")) {
                     System.out.println("Flyet letter. " + time.now());
                     printWriter.println("Flyet letter. " + time.now());
-                } else {
-                    System.out.println(messageFromTower + time.now());
+                } if(true) {
+                    //System.out.println(input.getMessageFromTower() + time.now());
                 }
             } while (!messageToTower.equals("Quit"));
         } catch (Exception e) {
+            System.out.println("jeg er her");
             e.printStackTrace();
         }
     }
+    public void landingResponse() throws InterruptedException {
+
+        //userThreads.writeToOne("Pilot", "test" + time.now());
+        System.out.println("Landing påbegyndt. " + time.now());
+        output.printWriter.println("Landing påbegyndt. " + time.now());
+        Thread.sleep(20000);
+        System.out.println("Er landet." + time.now());
+        output.printWriter.println("Er landet." + time.now());
+    }
 }
+*/
