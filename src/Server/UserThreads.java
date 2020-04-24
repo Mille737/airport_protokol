@@ -212,46 +212,42 @@ public class UserThreads extends Thread {
                 switch (choice) {
                     case "A":
                         if(responseFromTower) {
-                            printWriter.println("Tilladelse til at landing: Accepted. " + time.now());
-                            System.out.println("Landing påbegyndt. " + time.now());
-                            Thread.sleep(20000);
-                            System.out.println("Er landet." + time.now());
+                            printWriter.println("Tilladelse til at lande: Accepted." + time.now());
+                            System.out.println("Tilladelse til at lande. " + time.now());
                         }
                         break;
                     case "B":
                         if(responseFromTower) {
                             printWriter.println("Taxi til gate: Accepted. " + time.now());
-                            System.out.println("Taxi til gate påbegyndt. " + time.now());
-                            Thread.sleep(12000);
-                            printWriter.println("Ankommet ved gate: Accepted" + time.now());
-                            System.out.println("Ankommet ved gate." + time.now());
-                            writeToOne("Gate","Ankommet ved gate.");
+                            System.out.println("Tilladelse til taxi til gate.");
+                            if(bufferedReader.readLine().startsWith("Ankommet ved gate.")) {
+                                printWriter.println("Ankommet ved gate: Accepted" + time.now());
+                                writeToOne("Gate","Ankommet ved gate.");
+                            }
                         } else {
                             printWriter.println("Taxi til venteplads." + time.now());
-                            System.out.println("Taxi til venteplads påbegyndt." + time.now());
-                            Thread.sleep(8000);
-                            printWriter.println("Ankommet ved venteplads: Accepted" + time.now());
-                            System.out.println("Ankommet ved venteplads." + time.now());
+                            if(bufferedReader.readLine().startsWith("Ankommet ved venteplads.")) {
+                                printWriter.println("Ankommet ved venteplads: Accepted" + time.now());
+                            }
                         }
                         break;
                     case "C":
                         if(responseFromTower) {
                             printWriter.println("Taxi fra gate: Accepted. " + time.now());
-                            System.out.println("Taxi fra gate påbegyndt. " + time.now());
-                            Thread.sleep(10000);
-                            printWriter.println("Ankommet ved start: Accepted" + time.now());
-                            System.out.println("Ankommet ved start." + time.now());
+                            System.out.println("Tilladelse til taxi fra gate.");
+                            if(bufferedReader.readLine().startsWith("Ankommet ved start.")) {
+                                printWriter.println("Ankommet ved start: Accepted" + time.now());
+                            }
+
                         } else {
                             printWriter.println("Taxi til venteplads." + time.now());
-                            System.out.println("Taxi til venteplads påbegyndt." + time.now());
-                            Thread.sleep(8000);
-                            printWriter.println("Ankommet ved venteplads: Accepted" + time.now());
-                            System.out.println("Ankommet ved venteplads." + time.now());
+                            if(bufferedReader.readLine().startsWith("Ankommet ved venteplads.")) {
+                                printWriter.println("Ankommet ved venteplads: Accepted" + time.now());
+                            }
                         }
                         break;
                     case "D":
                         printWriter.println("Tilladelse til at lette: Accepted. " + time.now());
-                        System.out.println("Flyet letter. " + time.now());
                         break;
                     case "F":
                         printWriter.println("Forsinkelse på 10 min: Accepted. " + time.now());
