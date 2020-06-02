@@ -47,15 +47,19 @@ public class UserThreads extends Thread {
         }
         switch (userName) {
             case "Gate":
+                System.out.println(userName + " Accepted.");
                 gateProtocol();
                 break;
             case "Bagage":
+                System.out.println(userName + " Accepted.");
                 baggageProtocol();
                 break;
             case "Brændstof":
+                System.out.println(userName + " Accepted.");
                 fuelProtocol();
                 break;
             case "Pilot":
+                System.out.println(userName + " Accepted.");
                 pilotProtocol();
                 break;
         }
